@@ -60,13 +60,15 @@ const VerifiedPassword = () => {
         style={{
           width: "90%",
           height: 50,
-          borderColor: "gray",
-          borderBottomWidth: 1,
+          borderColor: "#ccc",
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 10,
-          marginBottom: 20,
           marginTop: 20,
-          backgroundColor: "#fff",
+          marginBottom: 20,
+          fontSize: 18,
+          alignSelf: "center",
+          backgroundColor: "#f9f9f9",
         }}
         placeholder="New Password"
         value={password}
@@ -79,13 +81,15 @@ const VerifiedPassword = () => {
         style={{
           width: "90%",
           height: 50,
-          borderColor: "gray",
-          borderBottomWidth: 1,
+          borderColor: "#ccc",
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 10,
-          marginBottom: 20,
           marginTop: 20,
-          backgroundColor: "#fff",
+          marginBottom: 20,
+          fontSize: 18,
+          alignSelf: "center",
+          backgroundColor: "#f9f9f9",
         }}
         placeholder="New Password (Confirmation)"
         value={passwordConfirmation}
@@ -97,7 +101,7 @@ const VerifiedPassword = () => {
         style={{
           width: "90%",
           height: 50,
-          backgroundColor: "blue",
+          backgroundColor: "#4CAF50",
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 8,

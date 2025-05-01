@@ -1,19 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, ScrollView, Text } from "react-native";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 20 }}>Under Construction HEHEHE</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Text style={{ fontSize: 24, margin: 20 }}>
+        Welcome, <Text> </Text>
+      </Text>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
 

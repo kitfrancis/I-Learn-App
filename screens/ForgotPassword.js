@@ -30,7 +30,16 @@ const ForgotPassword = () => {
         source={require("../assets/lock.png")}
         style={{ width: 100, height: 100, marginBottom: 20 }}
       />
-      <Text style={styles.title}>Forgot Password</Text>
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: "bold",
+          marginBottom: 20,
+          color: "black",
+        }}
+      >
+        Forgot Password
+      </Text>
       <Text
         style={{
           textAlign: "center",
@@ -43,14 +52,39 @@ const ForgotPassword = () => {
         password via email.
       </Text>
       <TextInput
-        style={styles.input}
+        style={{
+          width: "90%",
+          height: 50,
+          borderColor: "#ccc",
+          borderWidth: 1,
+          borderRadius: 8,
+          paddingHorizontal: 10,
+          marginTop: 30,
+          marginBottom: 20,
+          fontSize: 18,
+          alignSelf: "center",
+          backgroundColor: "#f9f9f9",
+        }}
         placeholder="Enter your email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
       />
-      <TouchableOpacity style={styles.button} onPress={handleForgotPassword}>
-        <Text style={styles.buttonText}>Reset Password</Text>
+      <TouchableOpacity
+        style={{
+          width: "90%",
+          height: 50,
+          marginTop: 10,
+          backgroundColor: "#4CAF50",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 8,
+        }}
+        onPress={handleForgotPassword}
+      >
+        <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+          Reset Password
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -63,36 +97,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     backgroundColor: "white",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "black",
-  },
-  input: {
-    width: "90%",
-    height: 50,
-    borderColor: "gray",
-    borderBottomWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    marginTop: 20,
-    backgroundColor: "#fff",
-  },
-  button: {
-    width: "90%",
-    height: 50,
-    backgroundColor: "blue",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });
 

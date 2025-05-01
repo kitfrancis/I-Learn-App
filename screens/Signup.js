@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   SafeAreaView,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -10,11 +11,13 @@ import {
   View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Signup = () => {
-  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
+  // const [gradelevel, setGradeLevel] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -22,62 +25,69 @@ const Signup = () => {
 
   const handleSignup = () => {
     if (
-      username.trim() === "" ||
+      fullname.trim() === "" ||
       password.trim() === "" ||
-      email.trim() === ""
+      email.trim() === "" ||
+      gradelevel.trim() === ""
     ) {
       Alert.alert("Error", "Please enter all fields.");
       return;
     }
 
-    console.log("Username:", username);
+    console.log("Fullname:", fullname);
     console.log("Password:", password);
     console.log("Remember Me:", rememberMe);
     Alert.alert("Success", "Signed up successfully!");
   };
 
+  const [role, setRole] = useState("student");
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image
-        source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+        source={require("../assets/i-learn.png")}
         style={{
-          width: "85%",
-          height: 100,
-          marginBottom: 20,
+          width: "90%",
+          height: 240,
           marginTop: 20,
           alignSelf: "center",
-          borderRadius: 5,
+          borderRadius: 10,
         }}
+        resizeMode="contain"
       ></Image>
 
       <TextInput
         style={{
           width: "90%",
           height: 50,
-          borderBottomColor: "gray",
-          borderBottomWidth: 2,
+          borderColor: "#ccc",
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 10,
-          marginTop: 20,
+          marginTop: 30,
           marginBottom: 20,
+          fontSize: 18,
           alignSelf: "center",
+          backgroundColor: "#f9f9f9",
         }}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Full Name"
+        value={fullname}
+        onChangeText={setFullname}
       />
 
       <TextInput
         style={{
           width: "90%",
           height: 50,
-          borderBottomColor: "gray",
-          borderBottomWidth: 2,
+          borderColor: "#ccc",
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 10,
           marginTop: 20,
           marginBottom: 20,
+          fontSize: 18,
           alignSelf: "center",
+          backgroundColor: "#f9f9f9",
         }}
         placeholder="Email"
         value={email}
@@ -88,13 +98,15 @@ const Signup = () => {
         style={{
           width: "90%",
           height: 50,
-          borderBottomColor: "gray",
-          borderBottomWidth: 2,
+          borderColor: "#ccc",
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 10,
           marginTop: 20,
           marginBottom: 20,
+          fontSize: 18,
           alignSelf: "center",
+          backgroundColor: "#f9f9f9",
         }}
         placeholder="Password"
         value={password}
@@ -102,11 +114,40 @@ const Signup = () => {
         secureTextEntry
       />
 
+      {/* <Text
+        style={{
+          width: "90%",
+          paddingLeft: 30,
+          marginTop: 20,
+          marginBottom: 10,
+        }}
+      >
+        Grade Level:
+      </Text>
+      <Picker
+        selectedValue={role}
+        onValueChange={(itemValue) => setRole(itemValue)}
+        style={{
+          alignSelf: "center",
+          height: 50,
+          width: "90%",
+          backgroundColor: "white",
+          marginBottom: 20,
+        }}
+      >
+        <Picker.Item label="Grade 7" value="grade7" />
+        <Picker.Item label="Grade 8" value="grade8" />
+        <Picker.Item label="Grade 9" value="grade9" />
+        <Picker.Item label="Grade 10" value="grade10" />
+        <Picker.Item label="Grade 11" value="grade11" />
+        <Picker.Item label="Grade 12" value="grade12" />
+      </Picker> */}
+
       <TouchableOpacity
         style={{
-          width: "80%",
+          width: "90%",
           height: 50,
-          backgroundColor: "blue",
+          backgroundColor: "#4CAF50",
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 8,
@@ -116,7 +157,7 @@ const Signup = () => {
         onPress={handleSignup}
       >
         <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
-          Sign Up
+          Enroll now
         </Text>
       </TouchableOpacity>
 
@@ -132,7 +173,7 @@ const Signup = () => {
         <Icon
           name={rememberMe ? "check-box" : "check-box-outline-blank"}
           size={24}
-          color="blue"
+          color="#4CAF50"
         />
         <Text style={{ fontSize: 16, color: "black", marginLeft: 10 }}>
           Remember Me
@@ -153,7 +194,7 @@ const Signup = () => {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          width: "80%",
+          width: "90%",
           height: 50,
           borderWidth: 1,
           borderColor: "#ccc",
@@ -175,12 +216,13 @@ const Signup = () => {
           fontSize: 16,
           color: "black",
           alignSelf: "center",
+          marginBottom: 50,
         }}
       >
         Already have an account?{" "}
         <Text
           style={{
-            color: "#007bff",
+            color: "#4CAF50",
             fontWeight: "bold",
             textDecorationStyle: "underline",
           }}
@@ -189,7 +231,7 @@ const Signup = () => {
           Log in
         </Text>
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
