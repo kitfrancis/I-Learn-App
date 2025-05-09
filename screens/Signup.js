@@ -12,32 +12,85 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Picker } from "@react-native-picker/picker";
+import axios from "axios";
+// import useAuthStore from "../store/useAuthStore";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const Signup = () => {
   const [fullname, setFullname] = useState("");
-  // const [gradelevel, setGradeLevel] = useState("");
+  const [fullnameverified, setFullnameVerified] = useState(false);
   const [email, setEmail] = useState("");
+  const [emailverified, setEmailVerified] = useState(false);
   const [password, setPassword] = useState("");
+  const [passwordverified, setPasswordVerified] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigation = useNavigation();
 
-  const handleSignup = () => {
-    if (
-      fullname.trim() === "" ||
-      password.trim() === "" ||
-      email.trim() === "" ||
-      gradelevel.trim() === ""
-    ) {
-      Alert.alert("Error", "Please enter all fields.");
+  function handleName(e) {
+    const nameVar = e.nativeEvent.text;
+    setFullname(nameVar);
+    setNameVerify(false);
+
+    if (nameVar.length > 1) {
+      setFullnameVerified(true);
+    }
+  }
+
+  const handleSignup = async () => {
+    let errors = [];
+
+    if (!fullname.trim()) {
+      errors.push("Full name is required.");
+    }
+
+    if (!email.trim()) {
+      errors.push("Email is required.");
+    } else if (!/^[\w-\.]+@gmail\.com$/.test(email)) {
+      errors.push("Email must be a valid Gmail address.");
+    }
+
+    if (!password.trim()) {
+      errors.push("Password is required.");
+    } else if (password.length < 8) {
+      errors.push("Password must be at least 8 characters long.");
+    }
+
+    if (errors.length > 0) {
+      Alert.alert("Validation Error", errors.join("\n"));
       return;
     }
 
-    console.log("Fullname:", fullname);
-    console.log("Password:", password);
-    console.log("Remember Me:", rememberMe);
-    Alert.alert("Success", "Signed up successfully!");
+    const userData = {
+      name: fullname,
+      email,
+      password,
+    };
+
+    // if (fullnameverified && emailverified && passwordverified) {
+    //   axios.post("http://192.168.1.2:3000/signup", userData).then((res) => {
+    //     console.log(res.data);
+    //     if (res.data.status === "ok") {
+    //       Alert.alert("Registered successfully!");
+    //     } else {
+    //       Alert.alert(JSON.stringify(res.data));
+    //     }
+    //   });
+    // }
+
+    try {
+      const res = await axios.post("http://192.168.1.2:3000/signup", userData);
+      console.log(res.data);
+
+      if (res.data.status === "ok") {
+        Alert.alert("Registered successfully!");
+        navigation.navigate("Login");
+      } else {
+        Alert.alert("Registration failed", res.data.data || "Try again.");
+      }
+    } catch (error) {
+      Alert.alert("Signup Failed", "Something went wrong.");
+    }
   };
 
   const [role, setRole] = useState("student");

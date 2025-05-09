@@ -9,10 +9,28 @@ import {
   Image,
   Alert,
 } from "react-native";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
-  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function handleSubmit() {
+    console.log(email, password);
+    const userData = { email: email, password };
+    axios.post("http://192.168.1.2:3000/login", userData).then((res) => {
+      console.log(res.data);
+
+      if (res.data.status === "ok") {
+        Alert.alert("Login successful!");
+        AsyncStorage.setItem("token", res.data.data);
+        navigation.navigate("Home");
+      } else {
+        Alert.alert("Login failed", res.data.message || "Invalid credentials");
+      }
+    });
+  }
 
   const handleLogin = () => {
     if (fullname.trim() === "" || password.trim() === "") {
@@ -38,7 +56,7 @@ const Login = ({ navigation }) => {
   //   }
   // };
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} keyboardShouldPersistTaps={"always"}>
       <ScrollView>
         <Image
           source={require("../assets/i-learn.png")}
@@ -69,9 +87,9 @@ const Login = ({ navigation }) => {
             alignSelf: "center",
             backgroundColor: "#f9f9f9",
           }}
-          placeholder="Full Name"
-          value={fullname}
-          onChangeText={setFullname}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           style={{
@@ -104,7 +122,12 @@ const Login = ({ navigation }) => {
             alignSelf: "center",
             marginTop: 20,
           }}
-          onPress={handleLogin}
+          // onPress={handleLogin}
+          onPress={() => {
+            {
+              handleSubmit();
+            }
+          }}
         >
           <Text style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}>
             Login

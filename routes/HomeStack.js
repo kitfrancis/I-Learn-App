@@ -85,7 +85,7 @@ const HomeStack = () => {
             color: "white",
           },
           headerStyle: {
-            backgroundColor: "blue",
+            backgroundColor: "#4CAF50",
             height: 100,
           },
           headerLeft: () => <CustomHeaderLeft navigation={navigation} />,
